@@ -192,7 +192,6 @@ project/
 │   │   ├── providers/             # External providers (SMS/Voice)
 │   │   │   ├── sms/
 │   │   │   │   ├── base-sms.provider.ts
-│   │   │   │   ├── africastalking.provider.ts
 │   │   │   │   ├── telecel.provider.ts
 │   │   │   │   ├── mtn.provider.ts
 │   │   │   │   ├── vodacom.provider.ts
@@ -311,27 +310,6 @@ project/
 │   ├── favicon.ico
 │   └── docs/
 │       └── api-v1.html           # Public API documentation
-├── docs/
-│   ├── api/
-│   │   ├── v1/
-│   │   │   ├── overview.md
-│   │   │   ├── authentication.md
-│   │   │   ├── sms-api.md
-│   │   │   ├── voice-api.md
-│   │   │   ├── lookup-api.md      # Africa phone lookup
-│   │   │   ├── email-api.md
-│   │   │   ├── billing-api.md
-│   │   │   └── webhooks.md
-│   │   └── africa-coverage.md     # Africa coverage guide
-│   └── examples/
-│       ├── curl/
-│       │   ├── send-sms.sh
-│       │   ├── lookup-number.sh
-│       │   └── send-email.sh
-│       ├── nodejs/
-│       │   └── client.js
-│       └── python/
-│           └── client.py
 ├── scripts/
 │   ├── database/
 │   │   ├── seed-africa.ts         # Seed African data

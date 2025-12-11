@@ -1,36 +1,101 @@
-# dependencies (bun install)
-node_modules
 
-# output
-out
-dist
-*.tgz
 
-# code coverage
-coverage
-*.lcov
+# Dependencies
+node_modules/
+bun.lockb
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-# logs
-logs
-_.log
-report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
-
-# dotenv environment variable files
+# Environment
 .env
-.env.development.local
-.env.test.local
-.env.production.local
 .env.local
+.env.*.local
+.env.production
+# .env.africa
 
-# caches
-.eslintcache
-.cache
+# Build output
+dist/
+build/
+.output/
 *.tsbuildinfo
 
-# IntelliJ based IDEs
-.idea
+# Prisma
+generated/
+prisma/migrations/
 
-# Finder (MacOS) folder config
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# OS
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.cache/
 
-/generated/prisma
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker
+.docker/
+
+# IDE
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.iml
+
+# Misc
+.husky/
+.turbo/
+.next/
+.nuxt/
+.vercel/
+.netlify/
+
+# Local development
+local/
+scripts/local/
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Sensitive data
+secrets/
+credentials/
+*.pem
+*.key
+*.cert
+*.crt
+
+# Documentation build
+docs/.vuepress/dist/
+docs/.vitepress/cache/

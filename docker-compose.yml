@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: africom-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: africom
+      POSTGRES_PASSWORD: africom_password
+      POSTGRES_DB: africom_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U africom -d africom_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - africom-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: africom-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass africom_redis_password
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "africom_redis_password", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - africom-network
+
+  # AfriCom API (uncomment when ready to containerize)
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: africom-api
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     NODE_ENV: production
+  #     DATABASE_URL: postgresql://africom:africom_password@postgres:5432/africom_db
+  #     REDIS_HOST: redis
+  #     REDIS_PORT: 6379
+  #     REDIS_PASSWORD: africom_redis_password
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   networks:
+  #     - africom-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  africom-network:
+    driver: bridge
