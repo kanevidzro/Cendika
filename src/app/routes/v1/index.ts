@@ -1,5 +1,7 @@
+
 import { Hono } from 'hono';
 import { ResponseBuilder } from '@utils/api-response';
+import smsRouter from '@modules/sms/routes/sms.routes';
 
 const v1Router = new Hono();
 
@@ -7,9 +9,16 @@ const v1Router = new Hono();
 v1Router.get('/', (c) => {
   return ResponseBuilder.success(c, {
     version: 'v1',
+    status: 'active',
     endpoints: {
-      auth: '/api/v1/auth',
-      sms: '/api/v1/sms',
+      sms: {
+        send: 'POST /api/v1/sms/send',
+        bulk: 'POST /api/v1/sms/bulk/send',
+        list: 'GET /api/v1/sms',
+        status: 'GET /api/v1/sms/:id/status',
+        resend: 'POST /api/v1/sms/:id/resend',
+        analytics: 'GET /api/v1/sms/analytics/overview',
+      },
       email: '/api/v1/email',
       voice: '/api/v1/voice',
       whatsapp: '/api/v1/whatsapp',
@@ -33,11 +42,13 @@ v1Router.get('/health', async (c) => {
 });
 
 // ============================================
-// MODULE ROUTES (to be added)
+// MODULE ROUTES
 // ============================================
 
-// v1Router.route('/auth', authRouter);
-// v1Router.route('/sms', smsRouter);
+// SMS routes
+v1Router.route('/sms', smsRouter);
+
+// Future module routes
 // v1Router.route('/email', emailRouter);
 // v1Router.route('/voice', voiceRouter);
 // v1Router.route('/whatsapp', whatsappRouter);
