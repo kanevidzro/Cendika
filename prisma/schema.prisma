@@ -84,6 +84,7 @@ enum TransactionType {
   REFUND
   BONUS
   CONVERSION
+  EMAIL_DEBIT
 }
 
 enum TeamRole {
